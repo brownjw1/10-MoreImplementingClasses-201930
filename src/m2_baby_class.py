@@ -3,8 +3,8 @@ A   Baby   class and functions that use/test it.
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Mark Hays, Amanda Stouder, Aaron Wilkin, their colleagues,
-         and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         and Jared Brown.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 
 def main():
@@ -43,43 +43,67 @@ def main():
 
 ###############################################################################
 # TODO: 2.
-#
-#  Step 2a:  Implement a class called   Baby   that has a constructor method
-#            (__init__) and two other methods, as described below.
-#
-#  Step 2b:  Test your finished   Baby   class by running this module.
-#            Your code passes the test if it displays exactly the output
-#            shown in the doc_string for main.
-#
-# -----------------------------------------------------------------------------
-# Here (below) are the methods that you must implement in your Baby class:
-# -----------------------------------------------------------------------------
-#
-# Constructor method (__init__)
-#     What comes in:
-#        -- self
-#        -- a string for the name of the baby
-#     What goes out:  Nothing (i.e., None).
-#     Side effects:
-#        -- Sets instance variables as needed [YOU FIGURE OUT WHAT IS NEEDED!]
-#        -- Prints 'Hello baby <your baby's name>!'
-#     Example:
-#         b = Baby('McKinley')   causes the following to be printed:
-#               Hello baby McKinley!
-#
-# feed_baby
-#     What comes in:
-#        -- self
-#     What goes out:  Nothing (i.e., None).
-#     Side effects:
-#        -- Prints 'Thank you for feeding baby <your baby's name>.'
-#        -- Modifies instance variables as needed
-#     Example:
-#         b = Baby('Joshua')
-#         b.feed_baby()         causes the following to be printed:
-#               Hello baby Joshua!
-#               Thank you for feeding baby Joshua.
-#
+class Baby():
+
+    #
+    #  Step 2a:  Implement a class called   Baby   that has a constructor method
+    #            (__init__) and two other methods, as described below.
+    #
+    #  Step 2b:  Test your finished   Baby   class by running this module.
+    #            Your code passes the test if it displays exactly the output
+    #            shown in the doc_string for main.
+    #
+    # -----------------------------------------------------------------------------
+    # Here (below) are the methods that you must implement in your Baby class:
+    # -----------------------------------------------------------------------------
+    def __init__(self, name):
+        self.name = name
+        print("Hello baby " + self.name + "!")
+        self.count=0
+
+    #
+    # Constructor method (__init__)
+    #     What comes in:
+    #        -- self
+    #        -- a string for the name of the baby
+    #     What goes out:  Nothing (i.e., None).
+    #     Side effects:
+    #        -- Sets instance variables as needed [YOU FIGURE OUT WHAT IS NEEDED!]
+    #        -- Prints 'Hello baby <your baby's name>!'
+    #     Example:
+    #         b = Baby('McKinley')   causes the following to be printed:
+    #               Hello baby McKinley!
+    #
+    def feed_baby(self):
+        print("Thank you for feeding baby " + self.name + ".")
+        self.count=0
+
+    # feed_baby
+    #     What comes in:
+    #        -- self
+    #     What goes out:  Nothing (i.e., None).
+    #     Side effects:
+    #        -- Prints 'Thank you for feeding baby <your baby's name>.'
+    #        -- Modifies instance variables as needed
+    #     Example:
+    #         b = Baby('Joshua')
+    #         b.feed_baby()         causes the following to be printed:
+    #               Hello baby Joshua!
+    #               Thank you for feeding baby Joshua.
+    #
+    def hour_passes(self):
+        if (self.count == 2):
+            print("Baby " + self.name + "is CRYING uncontrollably! Feed the Baby!")
+        if (self.count == 1):
+            print("Baby " + self.name + "is awake. Time for food.")
+            self.count += 1
+        if (self.count == 0):
+            print("Baby " + self.name + "is sleeping.")
+            self.count += 1
+
+
+
+
 # hour_passes
 #     What comes in:
 #        -- self
