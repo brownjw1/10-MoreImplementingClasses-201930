@@ -115,6 +115,7 @@ class CapitalT(object):
     """
 
     def __init__(self, intersection_center, width, height, letter_thickness):
+
         """
         *** See   dimensions.pdf   to understand the following! ***
 
@@ -170,6 +171,8 @@ class CapitalT(object):
         #   and *** NO OTHER INSTANCE VARIABLES. ***
         #   Note: Implement   attach_to   before testing this __init__ method.
         # ---------------------------------------------------------------------
+        self.h_rect = rg.Rectangle(rg.Point(intersection_center.x-width/2,intersection_center.y-letter_thickness/2),(intersection_center.x+width/2,intersection_center.y+letter_thickness/2))
+        self.v_rect = rg.Rectangle()
 
     def attach_to(self, window):
         """
