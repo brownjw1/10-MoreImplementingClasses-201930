@@ -20,10 +20,10 @@ def main():
     print('Un-comment the calls in MAIN one by one')
     print(' to run the testing code as you complete the TODOs.')
 
-    # run_test_simple_t()
-    # run_test_set_colors()
-    # run_test_move_by()
-    # run_test_clone()
+    run_test_simple_t()
+    run_test_set_colors()
+    run_test_move_by()
+    run_test_clone()
 
 
 def run_test_simple_t():
@@ -93,6 +93,7 @@ def run_test_clone():
     first_t.set_colors('blue', 'cyan')
     for k in range(6):
         t = first_t.clone()
+        t.set_colors('blue','cyan')
         if k < 2:
             t.set_colors('white', 'black')
         t.move_by(100 * k, 20 * k)
@@ -163,7 +164,7 @@ class CapitalT(object):
           :type letter_thickness:    int
         """
         # ---------------------------------------------------------------------
-        # TODO: 3.
+        # DONE: 3.
         #   READ the above specification, including the Example.
         #   Implement this method, using the instance variables
         #      h_rect
@@ -171,8 +172,18 @@ class CapitalT(object):
         #   and *** NO OTHER INSTANCE VARIABLES. ***
         #   Note: Implement   attach_to   before testing this __init__ method.
         # ---------------------------------------------------------------------
-        self.h_rect = rg.Rectangle(rg.Point(intersection_center.x-width/2,intersection_center.y-letter_thickness/2),(intersection_center.x+width/2,intersection_center.y+letter_thickness/2))
-        self.v_rect = rg.Rectangle()
+        hrectpoint1=rg.Point(intersection_center.x-width/2,intersection_center.y-letter_thickness/2)
+        hrectpoint2=rg.Point(intersection_center.x+width/2,intersection_center.y+letter_thickness/2)
+        self.h_rect = rg.Rectangle(hrectpoint1,hrectpoint2)
+        vrectpoint1=rg.Point(intersection_center.x-letter_thickness/2,intersection_center.y-letter_thickness/2)
+        vrectpoint2=rg.Point(intersection_center.x+letter_thickness/2,intersection_center.y+height-letter_thickness/2)
+        self.v_rect = rg.Rectangle(vrectpoint1,vrectpoint2)
+        self.intersection_center=intersection_center
+        self.width=width
+        self.height=height
+        self.letter_thickness=letter_thickness
+
+
 
     def attach_to(self, window):
         """
@@ -193,7 +204,7 @@ class CapitalT(object):
           :type window: rg.RoseWindow
         """
         # ---------------------------------------------------------------------
-        # TODO: 4.
+        # DONE: 4.
         #   READ the above specification, including the Example.
         #   Implement this method, then TEST it by:
         #     a. Un-comment the call to its test function, in main.  Run.
@@ -201,6 +212,8 @@ class CapitalT(object):
         #     c. Compare the graphics window to the   simple_t.pdf   pictures.
         #        They should look exactly the same as each other.
         # ---------------------------------------------------------------------
+        self.v_rect.attach_to(window)
+        self.h_rect.attach_to(window)
 
     def set_colors(self, fill_color, outline_color):
         """
@@ -225,7 +238,7 @@ class CapitalT(object):
           :type outline_color: str
         """
         # ---------------------------------------------------------------------
-        # TODO: 5.
+        # DONE: 5.
         #   READ the above specification, including the Example.
         #   Implement this method, then TEST it by:
         #     a. Un-comment the call to its test function, in main.  Run.
@@ -233,6 +246,10 @@ class CapitalT(object):
         #     c. Compare the graphics window to the  set_colors.pdf   pictures.
         #        They should look exactly the same as each other.
         # ---------------------------------------------------------------------
+        self.h_rect.fill_color=fill_color
+        self.v_rect.fill_color=fill_color
+        self.v_rect.outline_color=outline_color
+        self.h_rect.outline_color=outline_color
 
     def move_by(self, dx, dy):
         """
@@ -258,7 +275,7 @@ class CapitalT(object):
           :type dy: int
         """
         # ---------------------------------------------------------------------
-        # TODO: 6.
+        # DONE: 6.
         #   READ the above specification, including the Example.
         #   Implement this method, then TEST it by:
         #     a. Un-comment the call to its test function, in main.  Run.
@@ -269,6 +286,16 @@ class CapitalT(object):
         #        Note: the pdf shows the different locations that
         #        the T moves through, but there is only one T at any moment.
         # ---------------------------------------------------------------------
+
+        self.h_rect.corner_1.x+=dx
+        self.h_rect.corner_2.x+=dx
+        self.v_rect.corner_1.x+=dx
+        self.v_rect.corner_2.x+=dx
+
+        self.h_rect.corner_1.y+=dy
+        self.h_rect.corner_2.y+=dy
+        self.v_rect.corner_1.y+=dy
+        self.v_rect.corner_2.y+=dy
 
     def clone(self):
         """
@@ -303,6 +330,11 @@ class CapitalT(object):
         # IMPORTANT RESTRICTION: You are NOT permitted to add any instance
         # variables beyond  h_rect  and  v_rect, at any point of this exercise.
         #######################################################################
+
+        theT=CapitalT(self.intersection_center,self.width,self.height,self.letter_thickness)
+        #theT.set_colors(self.fill_color,self.outline_color)
+        return theT
+
 
 
 # -----------------------------------------------------------------------------
